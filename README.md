@@ -1,2 +1,2 @@
-# ether-scribe
+# Ether Scribe
 My Collaborative Editor
