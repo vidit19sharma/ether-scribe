@@ -4,6 +4,8 @@ import { authMiddleware, AuthRequest } from "../middleware/auth"
 
 const router = Router()
 
+// ----------------------------------------------- Document -----------------------------------------
+
 // Create document
 router.post("/", authMiddleware, async (req: AuthRequest, res) => {
   const doc = await DocumentModel.create({
@@ -54,6 +56,44 @@ router.put("/:id", authMiddleware, async (req: AuthRequest, res) => {
   await doc.save()
   res.json(doc)
 })
+
+// ---------------------------------------------- Collaborator --------------------------------------
+
+// Add collaborator (owner only)
+router.post(
+  "/:id/collaborators",
+  authMiddleware,
+  async (req: AuthRequest, res) => {
+    const { userId } = req.body
+
+    if (!userId)
+      return res.status(400).json({ message: "userId is required" })
+
+    const doc = await DocumentModel.findById(req.params.id)
+    if (!doc)
+      return res.status(404).json({ message: "Document not found" })
+
+    // Only owner can add collaborators
+    if (doc.owner.toString() !== req.userId)
+      return res
+        .status(403)
+        .json({ message: "Only owner can add collaborators" })
+
+    // Prevent duplicates
+    const alreadyCollaborator = doc.collaborators.some(
+      id => id.toString() === userId
+    )
+
+    if (alreadyCollaborator)
+      return res.status(400).json({ message: "User already collaborator" })
+
+    doc.collaborators.push(userId)
+    await doc.save()
+
+    res.json(doc)
+  }
+)
+
 
 
 export default router
