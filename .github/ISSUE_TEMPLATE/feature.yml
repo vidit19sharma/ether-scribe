@@ -1,0 +1,52 @@
+name: 🚀 Feature
+description: Propose or implement a new feature
+title: "[Feature]: "
+labels: ["feature"]
+assignees: []
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is this feature and why is it needed?
+      placeholder: Clear and concise description
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation / Problem
+      description: What problem does this solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: Proposed Solution
+      description: High-level approach or design
+      placeholder: Architecture, flow, or APIs involved
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Break down the work
+      value: |
+        - [ ] Task 1
+        - [ ] Task 2
+        - [ ] Task 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: What does "done" look like?
+      placeholder: Measurable outcomes
+    validations:
+      required: true

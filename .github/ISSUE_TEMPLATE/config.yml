@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/vidit19sharma/ether-scribe
+    about: Read project documentation before opening an issue
